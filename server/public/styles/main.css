@@ -1,0 +1,41 @@
+table {
+    border: 1px solid black;
+    table-layout: fixed;
+    width: 75%;
+}
+
+th,
+td {
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+}
+
+.smallTd {
+    width: 25px;
+    padding: 5px;
+    text-align: center;
+}
+
+.mediumTd {
+    width: 75px;
+    padding: 5px;
+    text-align: center;
+}
+
+.checkBtn {
+    width: 20px;
+}
+
+.taskField {
+    text-align: left;
+}
+
+.dateField {
+    width: 130px;
+    text-align: left
+}
+
+.toDoTask {
+    width: 250px;
+}

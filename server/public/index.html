@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main.css">
+    <script src="./vendors/jquery-3.6.3.js"></script>
+    <script src="./scripts/client.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <h1>To Do Application </h1>
+        <input type="text" id="toDoTask" size="100" placeholder="What do you need to do?!">
+        <input type="date" id="dueBy">
+        <br>
+        <button id="submitBtn">Submit</button>
+    </div>
+    <div>
+        <h2>Tasks to Complete</h2>
+        <table ID="tasksTable">
+            <tr>
+                <td class="smallTd"><button class="checkBtn">✅ </button></td>
+                <td class="taskField">BUY GROCERIES</td>
+                <td class="dateField">DATE:</td>
+                <td class="mediumTd"> <button>DELETE</button></td>
+            </tr>
+            <tr>
+                <td class="smallTd"><button class="checkBtn">✅</button></td>
+                <td class="taskField">DEFEAT SUPERMAN</td>
+                <td class="dateField">DATE:</td>
+                <td class="mediumTd"> <button>DELETE</button></td>
+            </tr>
+            <tr>
+                <td class="smallTd"><button class="checkBtn">✅</button></td>
+                <td class="taskField">CATCH ALL POKEMON</td>
+                <td class="dateField">DATE:</td>
+                <td class="mediumTd"> <button>DELETE</button></td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>
