@@ -81,19 +81,19 @@ function render(object) {
     for (let i = 0; i < object.length; i++) {
         let incomingId = object[i].id;
         $('#tasksTable').append(`
-            <tr data-id=${incomingId}>
-                <td class="smallTd" ><input type="checkbox" class="checkBtn" id=count${incomingId}></td>
+            <tr class=written data-id=${incomingId}>
+                <td class="smallTd"><input type="checkbox" class="checkBtn form-check-input" id=count${incomingId}></td>
                 <td class="taskField">${object[i].task}</td>
                 <td class="dateField">${object[i].date}</td>
-                <td class="mediumTd"> <button class="deleteBtn">DELETE</button></td>
+                <td class="mediumTd"> <button class="deleteBtn btn btn-danger">DELETE</button></td>
              </tr>
     `);
     if(object[i].complete === true) {
-        $(`[data-id=${incomingId}]`).addClass('done');
+        $(`[data-id=${incomingId}]`).addClass('table-success table-bordered border-dark');
         $(`[id=count${incomingId}]`).attr('checked', true)
       }
      else if (object[i].complete === false){
-        $(`[data-id=${incomingId}]`).removeClass('done');
+        $(`[data-id=${incomingId}]`).removeClass('table-success');
         $(`[id=count${incomingId}]`).attr('checked', false)
     }}
 }
