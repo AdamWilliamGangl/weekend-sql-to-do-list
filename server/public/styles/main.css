@@ -39,3 +39,8 @@ td {
 .toDoTask {
     width: 250px;
 }
+
+.done {
+    background-color: aquamarine;
+    text-decoration: line-through;
+}

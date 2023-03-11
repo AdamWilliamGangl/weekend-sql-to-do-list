@@ -76,15 +76,21 @@ function deleteTask() {
 //Function to render items to the DOM.
 function render(object) {
     $('#tasksTable').empty();
+   
     console.log('This is the object:', object);
     for (let i = 0; i < object.length; i++) {
+        let incomingId = object[i].id;
         $('#tasksTable').append(`
-            <tr data-id=${object[i].id}>
-                <td class="smallTd"><button class="checkBtn">✅ </button></td>
+            <tr data-id=${incomingId}>
+                <td class="smallTd" ><input type="checkbox" class="checkBtn" id=count${incomingId}></td>
                 <td class="taskField">${object[i].task}</td>
                 <td class="dateField">${object[i].date}</td>
                 <td class="mediumTd"> <button class="deleteBtn">DELETE</button></td>
              </tr>
     `);
+    if(object[i].complete === true) {
+        $(`[data-id=${incomingId}]`).addClass('done');
+        $(`[id=count${incomingId}]`).attr('checked', true)
+      }
     }
 }
