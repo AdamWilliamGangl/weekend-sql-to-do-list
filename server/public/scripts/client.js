@@ -3,8 +3,6 @@ $(document).ready(onReady);
 function onReady() {
     getTask();
     $('#submitBtn').on('click', handleSubmit);
-    // $('#tasksTable').on('click', '.checkBtn', updateTask)
-    // $('#tasksTable').on('click', '.deleteBtn', deleteTask)
     $('#tasksBoard').on('click', '.checkBtn', updateTask)
     $('#tasksBoard').on('click', '.deleteBtn', deleteTask)
 
@@ -84,7 +82,6 @@ $('#date[type=date]').val('');
 
 //Function to render items to the DOM.
 function render(object) {
-    // $('#tasksTable').empty();
     $('#tasksBoard').empty();
     console.log('This is the object:', object);
     for (let i = 0; i < object.length; i++) {
@@ -104,11 +101,11 @@ function render(object) {
               </li>`
              );
     if(object[i].complete === true) {
-        $(`[data-id=${incomingId}]`).addClass('table-success table-bordered border-dark');
+        $(`[data-id=${incomingId}]`).addClass('done');
         $(`[id=count${incomingId}]`).attr('checked', true)
       }
      else if (object[i].complete === false){
-        $(`[data-id=${incomingId}]`).removeClass('table-success');
+        $(`[data-id=${incomingId}]`).removeClass('done');
         $(`[id=count${incomingId}]`).attr('checked', false)
     }}
 }
