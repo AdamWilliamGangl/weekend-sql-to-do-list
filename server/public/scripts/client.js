@@ -92,5 +92,8 @@ function render(object) {
         $(`[data-id=${incomingId}]`).addClass('done');
         $(`[id=count${incomingId}]`).attr('checked', true)
       }
-    }
+     else if (object[i].complete === false){
+        $(`[data-id=${incomingId}]`).removeClass('done');
+        $(`[id=count${incomingId}]`).attr('checked', false)
+    }}
 }

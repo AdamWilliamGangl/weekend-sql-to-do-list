@@ -42,7 +42,7 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
     const idToMarkComplete = req.params.id;
     console.log('Inside of PUT @ tasks.router.js, this is req.params.id:', idToMarkComplete)
-    const queryText = `UPDATE tasks SET "complete" = TRUE WHERE id=$1;`
+    const queryText = `UPDATE tasks SET "complete" = NOT "complete" WHERE id=$1;`
     pool.query(queryText, [idToMarkComplete])
         .then(result => {
             console.log('Inside of PUT @ tasks.router.js, successfully put:', idToMarkComplete)
