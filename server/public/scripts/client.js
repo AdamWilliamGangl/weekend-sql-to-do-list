@@ -1,13 +1,15 @@
 $(document).ready(onReady);
 
 function onReady() {
+    getTask();
     $('#submitBtn').on('click', handleSubmit);
     $('#tasksTable').on('click', '.checkBtn', updateTask)
     $('#tasksTable').on('click', '.deleteBtn', deleteTask)
+
 }
 
 //function to pass values into the addTask function.
-function handleSubmit(){
+function handleSubmit() {
     let item = {};
     item.task = $('#toDoTask').val();
     item.date = $('#dueBy').val();
@@ -47,10 +49,10 @@ function updateTask() {
     const idToMarkDone = $(this).parent().parent().data().id;
     $.ajax({
         method: 'PUT',
-        url: `/tasks/${idToMarkRead}`
+        url: `/tasks/${idToMarkDone}`
     }).then((response) => {
         console.log('Mark as read was complete for id:', idToMarkDone);
-        refreshBooks();
+        getTask();
     }).catch((error) => {
         console.log('Error marking a task as done for id:', idToMarkDone, error);
     })
@@ -61,27 +63,27 @@ function deleteTask() {
     const idToDelete = $(this).parent().parent().data().id;
     console.log('ID to delete', idToDelete)
     $.ajax({
-      method: 'DELETE',
-      url: `/tasks/${idToDelete}`
-    }).then((response) =>{
-      console.log('Deletion was complete for id:', idToDelete);
-      refreshBooks();
+        method: 'DELETE',
+        url: `/tasks/${idToDelete}`
+    }).then((response) => {
+        console.log('Deletion was complete for id:', idToDelete);
+        getTask();
     }).catch((error) => {
-      console.log('Error making a deletion for id:', idToDelete, error);
+        console.log('Error making a deletion for id:', idToDelete, error);
     })
 };
 
 //Function to render items to the DOM.
 function render(object) {
     $('#tasksTable').empty();
-
+    console.log('This is the object:', object);
     for (let i = 0; i < object.length; i++) {
         $('#tasksTable').append(`
-            <tr data-id=${object.id}>
+            <tr data-id=${object[i].id}>
                 <td class="smallTd"><button class="checkBtn">✅ </button></td>
-                <td class="taskField">${object.task}</td>
-                <td class="dateField">${object.date}</td>
-                <td class="mediumTd"> <button>DELETE</button></td>
+                <td class="taskField">${object[i].task}</td>
+                <td class="dateField">${object[i].date}</td>
+                <td class="mediumTd"> <button class="deleteBtn">DELETE</button></td>
              </tr>
     `);
     }
