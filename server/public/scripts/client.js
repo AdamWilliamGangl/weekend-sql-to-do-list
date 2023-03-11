@@ -3,8 +3,10 @@ $(document).ready(onReady);
 function onReady() {
     getTask();
     $('#submitBtn').on('click', handleSubmit);
-    $('#tasksTable').on('click', '.checkBtn', updateTask)
-    $('#tasksTable').on('click', '.deleteBtn', deleteTask)
+    // $('#tasksTable').on('click', '.checkBtn', updateTask)
+    // $('#tasksTable').on('click', '.deleteBtn', deleteTask)
+    $('#tasksBoard').on('click', '.checkBtn', updateTask)
+    $('#tasksBoard').on('click', '.deleteBtn', deleteTask)
 
 }
 
@@ -31,6 +33,7 @@ function addTask(taskToAdd) {
 
 //Function to get an updated task list from the database (GET).
 function getTask() {
+    resetInputFields();
     $.ajax({
         type: 'GET',
         url: '/tasks'
@@ -45,8 +48,8 @@ function getTask() {
 //Function to update a task on the database (PUT).
 function updateTask() {
     console.log('This is $(this)', $(this));
-    console.log('this.parent().parent().data()', $(this).parent().parent().data());
-    const idToMarkDone = $(this).parent().parent().data().id;
+    console.log('this.parent().parent().parent().data().id', $(this).parent().parent().parent().data().id);
+    const idToMarkDone = $(this).parent().parent().parent().data().id;
     $.ajax({
         method: 'PUT',
         url: `/tasks/${idToMarkDone}`
@@ -60,7 +63,8 @@ function updateTask() {
 
 //Function to delete a task from the database (DELETE).
 function deleteTask() {
-    const idToDelete = $(this).parent().parent().data().id;
+    const idToDelete = $(this).parent().parent().parent().data().id;
+    console.log('this is $(this):', $(this))
     console.log('ID to delete', idToDelete)
     $.ajax({
         method: 'DELETE',
@@ -73,21 +77,32 @@ function deleteTask() {
     })
 };
 
+function resetInputFields(){
+$('#toDoTask').val('');
+$('#date[type=date]').val('');
+};
+
 //Function to render items to the DOM.
 function render(object) {
-    $('#tasksTable').empty();
-   
+    // $('#tasksTable').empty();
+    $('#tasksBoard').empty();
     console.log('This is the object:', object);
     for (let i = 0; i < object.length; i++) {
         let incomingId = object[i].id;
-        $('#tasksTable').append(`
-            <tr class=written data-id=${incomingId}>
-                <td class="smallTd"><input type="checkbox" class="checkBtn form-check-input" id=count${incomingId}></td>
-                <td class="taskField">${object[i].task}</td>
-                <td class="dateField">${object[i].date}</td>
-                <td class="mediumTd"> <button class="deleteBtn btn btn-danger">DELETE</button></td>
-             </tr>
-    `);
+             $('#tasksBoard').append(`
+             <br>
+             <li data-id=${incomingId}>
+             <a href>
+                 <p class="taskField">${object[i].task}</p>
+                 <br>
+                 <p class="dateField">Due:${object[i].date}</p>
+                 <br>
+                 <p><input type="checkbox" class="checkBtn form-check-input" id=count${incomingId}>  Done! </p>
+                 <br>
+                <p><button class="deleteBtn btn btn-danger">remove</button></p>
+              </a>
+              </li>`
+             );
     if(object[i].complete === true) {
         $(`[data-id=${incomingId}]`).addClass('table-success table-bordered border-dark');
         $(`[id=count${incomingId}]`).attr('checked', true)
