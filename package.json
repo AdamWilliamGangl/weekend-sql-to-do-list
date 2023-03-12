@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.2",
+    "bootstrap-icons": "^1.10.3",
     "express": "^4.18.2",
     "pgm": "^1.0.8"
   },
