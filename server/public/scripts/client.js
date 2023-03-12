@@ -89,7 +89,7 @@ function render(object) {
              $('#tasksBoard').append(`
              <br>
              <li data-id=${incomingId}>
-             <a href>
+             <a>
                  <p class="taskField">${object[i].task}</p>
                  <br>
                  <p class="dateField">Due:${object[i].date}</p>
