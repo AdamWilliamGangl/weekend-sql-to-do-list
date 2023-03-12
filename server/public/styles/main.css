@@ -5,14 +5,14 @@ body {
     color:#fff;
   }
 
-div#frame {
+#frame {
     background: url(https://cdn.pixabay.com/photo/2019/06/26/19/49/pin-board-4301129_1280.png) no-repeat;
-    width: auto;
-    height: 1000px;
-    padding-top: 35px;
-    padding-left: 35px;
+    background-size: 100% 100%;;
     padding-top: 3%;
-    padding-right: 11%
+    padding-left: 3%;
+    padding-top: 3%;
+    padding-right: 3%;
+    padding-bottom: 3%;
 }
 
   *{
