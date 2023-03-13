@@ -3,9 +3,8 @@ $(document).ready(onReady);
 function onReady() {
     getTask();
     $('#submitBtn').on('click', handleSubmit);
-    $('#tasksBoard').on('click', '.checkBtn', updateTask)
-    $('#tasksBoard').on('click', '.deleteBtn', deleteTask)
-
+    $('#tasksBoard').on('click', '.checkBtn', updateTask);
+    $('#tasksBoard').on('click', '.deleteBtn', deleteTask);
 }
 
 //function to pass values into the addTask function.
@@ -62,22 +61,37 @@ function updateTask() {
 //Function to delete a task from the database (DELETE).
 function deleteTask() {
     const idToDelete = $(this).parent().parent().parent().data().id;
-    console.log('this is $(this):', $(this))
-    console.log('ID to delete', idToDelete)
-    $.ajax({
-        method: 'DELETE',
-        url: `/tasks/${idToDelete}`
-    }).then((response) => {
-        console.log('Deletion was complete for id:', idToDelete);
-        getTask();
-    }).catch((error) => {
-        console.log('Error making a deletion for id:', idToDelete, error);
+    swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this super important post-it!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
     })
+        .then((willDelete) => {
+            if (willDelete) {
+                swal("Poof! Your post-it has been trashed!", {
+                    icon: "success",
+                });
+                $.ajax({
+                    method: 'DELETE',
+                    url: `/tasks/${idToDelete}`
+                }).then((response) => {
+                    console.log('Deletion was complete for id:', idToDelete);
+                    getTask();
+                }).catch((error) => {
+                    console.log('Error making a deletion for id:', idToDelete, error);
+                })
+            } else {
+                swal("Your post-it is safe!");
+            }
+        });
+    
 };
 
-function resetInputFields(){
-$('#toDoTask').val('');
-$('#date[type=date]').val('');
+function resetInputFields() {
+    $('#toDoTask').val('');
+    $('#date[type=date]').val('');
 };
 
 //Function to render items to the DOM.
@@ -86,7 +100,7 @@ function render(object) {
     console.log('This is the object:', object);
     for (let i = 0; i < object.length; i++) {
         let incomingId = object[i].id;
-             $('#tasksBoard').append(`
+        $('#tasksBoard').append(`
              <br>
              <li data-id=${incomingId}>
              <a>
@@ -99,13 +113,14 @@ function render(object) {
                 <p><button class="deleteBtn btn btn-danger">remove</button></p>
               </a>
               </li>`
-             );
-    if(object[i].complete === true) {
-        $(`[data-id=${incomingId}]`).addClass('done');
-        $(`[id=count${incomingId}]`).attr('checked', true)
-      }
-     else if (object[i].complete === false){
-        $(`[data-id=${incomingId}]`).removeClass('done');
-        $(`[id=count${incomingId}]`).attr('checked', false)
-    }}
+        );
+        if (object[i].complete === true) {
+            $(`[data-id=${incomingId}]`).addClass('done');
+            $(`[id=count${incomingId}]`).attr('checked', true)
+        }
+        else if (object[i].complete === false) {
+            $(`[data-id=${incomingId}]`).removeClass('done');
+            $(`[id=count${incomingId}]`).attr('checked', false)
+        }
+    }
 }
