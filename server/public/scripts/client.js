@@ -124,22 +124,3 @@ function render(object) {
         }
     }
 }
-
-// function deleteWarning() {
-//     swal({
-//         title: "Are you sure?",
-//         text: "Once deleted, you will not be able to recover this super important post-it!",
-//         icon: "warning",
-//         buttons: true,
-//         dangerMode: true,
-//     })
-//         .then((willDelete) => {
-//             if (willDelete) {
-//                 swal("Poof! Your post-it has been trashed!", {
-//                     icon: "success",
-//                 });
-//             } else {
-//                 swal("Your post-it is safe!");
-//             }
-//         });
-// }
